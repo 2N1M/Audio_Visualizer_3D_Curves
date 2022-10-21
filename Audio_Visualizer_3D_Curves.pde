@@ -54,6 +54,10 @@ boolean lockedRot = true;
 CloneCurve[] cloneCurves;
 
 void setup() {
+  String[] args = {"Audio_Visualizer_3D_Curves"};
+  MenuScreenApplet menuScreen = new MenuScreenApplet();
+  PApplet.runSketch(args, menuScreen);
+
   //size(1500, 1000, P3D);
   fullScreen(P3D);
   noCursor();
@@ -75,8 +79,8 @@ void setup() {
   cloneCurves = new CloneCurve[0];
 }
 
-void keyPressed(){
-  if(key == 'l' && lockedRot == false)lockedRot = true;
+void keyPressed() {
+  if (key == 'l' && lockedRot == false)lockedRot = true;
   else lockedRot = false;
 }
 
@@ -84,9 +88,9 @@ void draw() {
   clear();
   background(backgroundColor);
   fft.analyze(spectrum);
-  
+
   timeSlower = millis()/100f;
-  
+
   //Camera and its movement
   camera((-sin(radians(timeSlower))*2000)+width/2, (cos(radians(timeSlower))*300)+400, (-cos(radians(timeSlower))*1000)+100.0, // eyeX, eyeY, eyeZ
     width/2, 650, (-cos(radians(timeSlower))*300-0), // centerX, centerY, centerZ
@@ -108,10 +112,10 @@ void draw() {
     float dCurveEasing = targetCurveY - smoothSpectrum[abs(i)];
     smoothSpectrum[abs(i)] += dCurveEasing * curveEasingVal;
 
-    //stroke( lerpColor( #ff0000, #ffffff, (smoothSpectrum[constrain(abs(i)+((i>0)?-1:+1), 0, curveBands)]/-30)));    
+    //stroke( lerpColor( #ff0000, #ffffff, (smoothSpectrum[constrain(abs(i)+((i>0)?-1:+1), 0, curveBands)]/-30)));
     curveVertex(spectrumCurveCenter + i*curveVertexDist, smoothSpectrum[abs(i)] + spectrumCurveYPos);
   }
   endShape();
-  
-  GradientCurveDraw();  
+
+  GradientCurveDraw();
 }

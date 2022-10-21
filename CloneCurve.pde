@@ -8,8 +8,8 @@ class CloneCurve {
   float speed = 8;
   float alpha = 255;
   float dimSpeed = 0.7;
-  CloneCurve(float[] curveVertsArray){
-    arrayCopy(curveVertsArray,cloneSpectrum);
+  CloneCurve(float[] curveVertsArray) {
+    arrayCopy(curveVertsArray, cloneSpectrum);
   }
   void update() {
     zPos -= speed;
@@ -18,7 +18,7 @@ class CloneCurve {
     alpha -= dimSpeed;
     pushMatrix();
     noFill();
-    stroke(lerpColor(primaryColor,secondaryColor,alpha/255), alpha);
+    stroke(lerpColor(primaryColor, secondaryColor, alpha/255), alpha);
     translate(0, 0, zPos);
     beginShape();
     rotateZ(radians(zRot));
