@@ -1,0 +1,26 @@
+[
+    [
+        {
+            "leftMargin": 50,
+            "topMargin": 90,
+            "elementYDist": 50,
+            "normalTextSize": 16,
+            "verticalTextPadding": 20,
+            "buttonWidth": 200,
+
+            "titleText": "3D Curve Audio Visualizer",
+            "titleTextSize": 40,
+            "titleTextPos": 30             
+        }
+    ],
+    [
+        {
+            "buttonName": "Lock trail rotation",
+            "startState": false
+        },
+        {
+            "buttonName": "Front gradient curves",
+            "startState": true
+        }
+    ]
+]

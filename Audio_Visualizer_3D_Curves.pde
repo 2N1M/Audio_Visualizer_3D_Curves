@@ -2,6 +2,9 @@ import processing.sound.*;
 FFT fft;
 AudioIn in;
 
+//Menu layout
+JSONArray layout;
+
 //Create frequency spectrum array
 int bands = 512;
 float[] spectrum = new float[bands];
@@ -49,17 +52,29 @@ color primaryColor = #34e89e;
 color secondaryColor = #0f3443;
 
 //Locks the rotation of clone curves
-boolean lockedRot = true;
+boolean lockedTrailRot = false;
+
+boolean gradientCurves = true;
 
 CloneCurve[] cloneCurves;
 
+//Set fullscreen and set window icon
+public void settings() {
+  fullScreen(P3D);
+  PJOGL.setIcon("data/icon.png");
+}
+
 void setup() {
+  surface.setTitle("AV3D");
+  //Load JSON and retrieve JSONArray 
+  layout = loadJSONArray("layout.json");
+
   String[] args = {"Audio_Visualizer_3D_Curves"};
   MenuScreenApplet menuScreen = new MenuScreenApplet();
   PApplet.runSketch(args, menuScreen);
 
   //size(1500, 1000, P3D);
-  fullScreen(P3D);
+  //fullScreen(P3D);
   noCursor();
   //background(#040404);
   background(backgroundColor);
@@ -80,8 +95,8 @@ void setup() {
 }
 
 void keyPressed() {
-  if (key == 'l' && lockedRot == false)lockedRot = true;
-  else lockedRot = false;
+  if (key == 'l' && lockedTrailRot == false)lockedTrailRot = true;
+  else lockedTrailRot = false;
 }
 
 void draw() {
@@ -117,5 +132,8 @@ void draw() {
   }
   endShape();
 
-  GradientCurveDraw();
+
+  if(gradientCurves){
+    GradientCurveDraw();
+  }
 }

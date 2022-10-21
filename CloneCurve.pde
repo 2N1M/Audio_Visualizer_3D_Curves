@@ -14,7 +14,7 @@ class CloneCurve {
   void update() {
     zPos -= speed;
     zRot -= rotSpeed;
-    rotSpeed += lockedRot?0:map(mouseX, 0, width, -0.005f, 0.005f);
+    rotSpeed += lockedTrailRot?0:map(mouseX, 0, width, -0.005f, 0.005f);
     alpha -= dimSpeed;
     pushMatrix();
     noFill();
