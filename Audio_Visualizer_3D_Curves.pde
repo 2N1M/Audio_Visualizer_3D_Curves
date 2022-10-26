@@ -20,7 +20,7 @@ float spectrumCurveYPos = 700;
 float spectrumJumpMultiplier = -300;
 
 //Negative to make curve face upward
-float spectrumCurveMultiplier = -1000;
+float spectrumCurveMultiplier = -1500;
 
 //Curve movement easing lower is smoother
 float curveEasingVal = 0.2;
@@ -40,27 +40,35 @@ float gradientCurvesDistance = 40;
 float timeSlower;
 float band3;
 
-//Colors
-//Og black #040404
-color backgroundColor = #181818;
+//Camera parameters
+float eyeX;
+float eyeY;
+float eyeZ;
 
-//Pink purple
-//color primaryColor = #8E2DE2;
-//color secondaryColor = #4A00E0;
-//
+float centerX;
+float centerY;
+float centerZ;
+
+//Start colors
+color backgroundColor = #181818;
 color primaryColor = #34e89e;
 color secondaryColor = #0f3443;
 
+//Fill the main curve
+boolean fillMainCurve = true;
 //Locks the rotation of clone curves
 boolean lockedTrailRot = false;
-
+//Display front gradient curves
 boolean gradientCurves = true;
+//Automatically rotate camera
+boolean autoCam = true;
 
 CloneCurve[] cloneCurves;
 
 //Set fullscreen and set window icon
 public void settings() {
   fullScreen(P3D);
+  //size(1500, 1000, P3D);
   PJOGL.setIcon("data/icon.png");
 }
 
@@ -73,10 +81,7 @@ void setup() {
   MenuScreenApplet menuScreen = new MenuScreenApplet();
   PApplet.runSketch(args, menuScreen);
 
-  //size(1500, 1000, P3D);
-  //fullScreen(P3D);
   noCursor();
-  //background(#040404);
   background(backgroundColor);
   noStroke();
 
@@ -100,15 +105,34 @@ void keyPressed() {
 }
 
 void draw() {
-  clear();
-  background(backgroundColor);
-  fft.analyze(spectrum);
+  //clear();
+  //background(backgroundColor);
+  pushMatrix();
+  fill(backgroundColor, 255);
+  sphere(7000);
+  popMatrix();
 
-  timeSlower = millis()/100f;
+  fft.analyze(spectrum);  
 
   //Camera and its movement
-  camera((-sin(radians(timeSlower))*2000)+width/2, (cos(radians(timeSlower))*300)+400, (-cos(radians(timeSlower))*1000)+100.0, // eyeX, eyeY, eyeZ
-    width/2, 650, (-cos(radians(timeSlower))*300-0), // centerX, centerY, centerZ
+  //Rotation on axis in a circle = (sin(time)*amplitude) + pivot point
+  if(autoCam){
+    timeSlower += 0.3;
+    eyeX = (-sin(radians(timeSlower))*2000)+width/2;
+    eyeY = (cos(radians(timeSlower))*300)+400;
+    eyeZ = (-cos(radians(timeSlower))*1000)+100.0;
+  }else{
+
+  }
+
+  centerX = width/2;
+  centerY = 650;
+  centerZ = 0;
+  //(-cos(radians(timeSlower))*300-0)
+  
+  
+  camera(eyeX, eyeY, eyeZ,
+    centerX, centerY, centerZ,
     0.0, 1.0, 0.0); // upX, upY, upZ
 
   CloneCurveSpawn();
@@ -117,7 +141,11 @@ void draw() {
   stroke(primaryColor);
   strokeWeight(1);
   pushMatrix();
-  fill(primaryColor);
+  if(fillMainCurve){
+    fill(primaryColor);
+  }else{
+    noFill();
+  }
   //textSize(30f-smoothSpectrum[3]/50f);
   //text("//EenM", 0, spectrumCurveYPos+40);
   popMatrix();

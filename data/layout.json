@@ -1,26 +1,76 @@
 [
     [
         {
+            "presetName": "Dark pink",
+            "backgroundColor": "#040404",
+            "primaryColor": "#8E2DE2",
+            "secondaryColor": "#4A00E0"
+        },
+        {
+            "presetName": "Spotify green",
+            "backgroundColor": "#181818",
+            "primaryColor": "#34e89e",
+            "secondaryColor": "#0f3443"
+        },
+        {
+            "presetName": "Light blue",
+            "backgroundColor": "#ffffff",
+            "primaryColor": "#004e92",
+            "secondaryColor": "#000428"
+        }
+    ],
+    [
+        {
             "leftMargin": 50,
             "topMargin": 90,
             "elementYDist": 50,
             "normalTextSize": 16,
+            "headingTextSize": 20,
             "verticalTextPadding": 20,
-            "buttonWidth": 200,
+            "elementWidth": 300,
 
-            "titleText": "3D Curve Audio Visualizer",
+            "titleText": "AV3D",
             "titleTextSize": 40,
             "titleTextPos": 30             
         }
     ],
     [
         {
-            "buttonName": "Lock trail rotation",
-            "startState": false
+            "elementType": "heading",
+            "text": "Curve parameters"
         },
         {
+            "elementType": "toggleButton",
+            "buttonName": "Fill main curve",
+            "startState": true,
+            "buttonID": 0
+        },
+        {
+            "elementType": "toggleButton",
+            "buttonName": "Lock trail rotation",
+            "startState": false,
+            "buttonID": 1
+        },
+        {
+            "elementType": "toggleButton",
             "buttonName": "Front gradient curves",
-            "startState": true
+            "startState": true,
+            "buttonID": 2
+        },
+        {
+            "elementType": "heading",
+            "text": "Camera parameters"
+        },
+        {
+            "elementType": "toggleButton",
+            "buttonName": "Auto cam movement",
+            "startState": true,
+            "buttonID": 3
+        },
+        {
+            "elementType": "button",
+            "buttonName": "Reset cam position",
+            "buttonID": 4
         }
     ]
 ]
