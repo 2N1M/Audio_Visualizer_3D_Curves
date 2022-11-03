@@ -40,6 +40,16 @@
             "text": "Curve parameters"
         },
         {
+            "elementType": "slider",
+            "sliderName": "Curve sound sensitivity",
+            "defaultValue": 1500,
+            "minValue": 1000,
+            "maxValue": 5000,
+            "nfLeft": 4,
+            "nfRight": 0,
+            "sliderID": 1
+        },
+        {
             "elementType": "toggleButton",
             "buttonName": "Fill main curve",
             "startState": true,
@@ -48,7 +58,7 @@
         {
             "elementType": "toggleButton",
             "buttonName": "Lock trail rotation",
-            "startState": false,
+            "startState": true,
             "buttonID": 1
         },
         {
@@ -68,9 +78,63 @@
             "buttonID": 3
         },
         {
+            "elementType": "slider",
+            "sliderName": "X axis orbit amplitude",
+            "defaultValue": 1500,
+            "minValue": 100,
+            "maxValue": 4000,
+            "nfLeft": 4,
+            "nfRight": 0,
+            "sliderID": 2
+        },
+        {
+            "elementType": "slider",
+            "sliderName": "Y axis orbit amplitude",
+            "defaultValue": 1500,
+            "minValue": 100,
+            "maxValue": 4000,
+            "nfLeft": 4,
+            "nfRight": 0,
+            "sliderID": 3
+        },
+        {
+            "elementType": "slider",
+            "sliderName": "Z axis orbit amplitude",
+            "defaultValue": 1500,
+            "minValue": 100,
+            "maxValue": 4000,
+            "nfLeft": 4,
+            "nfRight": 0,
+            "sliderID": 4
+        },
+        {
+            "elementType": "slider",
+            "sliderName": "Orbit speed",
+            "defaultValue": 0.3,
+            "minValue": 0.1,
+            "maxValue": 1.0,
+            "nfLeft": 1,
+            "nfRight": 2,
+            "sliderID": 5
+        },
+        {
             "elementType": "button",
             "buttonName": "Reset cam position",
             "buttonID": 4
+        },
+        {
+            "elementType": "heading",
+            "text": "Background parameters"
+        },
+        {
+            "elementType": "slider",
+            "sliderName": "Background fade opacity",
+            "defaultValue": 200,
+            "minValue": 0,
+            "maxValue": 255,
+            "nfLeft": 3,
+            "nfRight": 0,
+            "sliderID": 0
         }
     ]
 ]
