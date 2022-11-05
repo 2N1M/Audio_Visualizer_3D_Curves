@@ -15,6 +15,7 @@ float soundAmp;
 
 float spectrumCurveCenter = width/2;
 float spectrumCurveYPos = 700;
+
 float spectrumJumpMultiplier = -1000;
 
 //Negative to make curve face upward
@@ -33,6 +34,7 @@ int curveBands = 60;
 float curveVertexDist = 20;
 
 float gradientCurvesNumber = 15;
+float gradientCurvesOnOffTransition;
 float gradientCurvesDistance = 40;
 
 float timeSlower;
@@ -266,8 +268,13 @@ void draw() {
   }
   endShape((shapeLerpAmount >= 0.97f)?CLOSE:OPEN);
 
-
+  //Gradient curve on off transition
   if(gradientCurves){
+    println(gradientCurvesNumber);
+    gradientCurvesNumber = (gradientCurvesOnOffTransition<15)?gradientCurvesOnOffTransition++:gradientCurvesOnOffTransition;
+    GradientCurveDraw();
+  } else if(gradientCurvesOnOffTransition > 0){
+    gradientCurvesNumber = (gradientCurvesOnOffTransition>0)?gradientCurvesOnOffTransition--:gradientCurvesOnOffTransition;
     GradientCurveDraw();
   }
 }

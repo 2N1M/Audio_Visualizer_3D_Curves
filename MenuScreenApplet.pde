@@ -256,6 +256,9 @@ class MenuScreenApplet extends PApplet {
         case 9:
           curveCloneSpawnTime = sliders[i].sliderValue;
           break;
+        case 10:
+          curveEasingVal = sliders[i].sliderValue;
+          break;
       }      
     }
   }

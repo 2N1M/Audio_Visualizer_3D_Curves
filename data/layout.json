@@ -51,13 +51,23 @@
         },
         {
             "elementType": "slider",
-            "sliderName": "Curve sound sensitivity",
+            "sliderName": "Curve sensitivity",
             "defaultValue": 1500,
             "minValue": 1000,
             "maxValue": 5000,
             "nfLeft": 4,
             "nfRight": 0,
             "sliderID": 1
+        },
+        {
+            "elementType": "slider",
+            "sliderName": "Curve smoothing",
+            "defaultValue": 0.2,
+            "minValue": 0.05,
+            "maxValue": 1.00,
+            "nfLeft": 1,
+            "nfRight": 2,
+            "sliderID": 10
         },
         {
             "elementType": "toggleButton",
@@ -101,7 +111,7 @@
             "elementType": "slider",
             "sliderName": "Main curve bass bounce",
             "defaultValue": 300,
-            "minValue": 300,
+            "minValue": 0,
             "maxValue": 5000,
             "nfLeft": 4,
             "nfRight": 0,
