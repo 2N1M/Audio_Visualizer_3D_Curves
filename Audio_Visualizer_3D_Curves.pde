@@ -127,7 +127,7 @@ void setup() {
 
   //Create the Input stream which is used for the frequency analyzer
   fft = new FFT(this, bands);
-  // Create a Sound object and select the second sound device (device ids start at 0) for input
+  //Grab the default audio input from sound card
   in = new AudioIn(this, 0);
   //Start the Audio Input
   in.start();
