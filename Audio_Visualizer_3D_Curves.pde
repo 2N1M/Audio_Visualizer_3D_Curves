@@ -10,13 +10,12 @@ int bands = 512;
 float[] spectrum = new float[bands];
 //Create frequency spectrum array to store smoothed spectrum values
 float[] smoothSpectrum = new float[bands];
-float[] test = new float[bands];
 
 float soundAmp;
 
 float spectrumCurveCenter = width/2;
 float spectrumCurveYPos = 700;
-float spectrumJumpMultiplier = -300;
+float spectrumJumpMultiplier = -1000;
 
 //Negative to make curve face upward
 float spectrumCurveMultiplier = -1500;
@@ -38,6 +37,9 @@ float gradientCurvesDistance = 40;
 
 float timeSlower;
 float band3;
+
+PVector[] lineShape = new PVector[120];
+PVector[] circleShape = new PVector[120];
 
 //Camera parameters
 float eyeX;
@@ -78,17 +80,27 @@ color lighterBackgroundColor = #2b2b2b;
 color primaryColor = #34e89e;
 color secondaryColor = #0f3443;
 
+//Start colors
+// color backgroundColor = #040404;
+// color lighterBackgroundColor = #2b2b2b;
+// color primaryColor = #8E2DE2;
+// color secondaryColor = #4A00E0;
+
 //Background opacity fade effect
 int backgroundFade = 255;
 
 //Fill the main curve
-boolean fillMainCurve = true;
+boolean fillMainCurve = false;
 //Locks the rotation of clone curves
 boolean lockedTrailRot = false;
 //Display front gradient curves
-boolean gradientCurves = true;
+boolean gradientCurves = false;
 //Automatically rotate camera
 boolean autoCam = true;
+//Are there trail curves
+boolean trailCurves = true;
+
+float shapeLerpAmount = 0;
 
 CloneCurve[] cloneCurves;
 
@@ -121,6 +133,11 @@ void setup() {
   fft.input(in);
 
   cloneCurves = new CloneCurve[0];
+
+  for (int i = 0; i < 120; i++){
+    lineShape[i] = new PVector(-(-curveBands + i)*curveVertexDist, 0);
+    circleShape[i] = new PVector(((curveBands*curveVertexDist)/2) * cos((-curveBands + i) * radians(180/curveBands) + PI/2), ((curveBands*curveVertexDist)/2) * sin((-curveBands + i) * radians(180/curveBands)+ PI/2));
+  }  
 }
 
 void keyPressed() {
@@ -211,7 +228,9 @@ void draw() {
   centerZ = 0;
   //(-cos(radians(timeSlower))*300-0)  
 
-  CloneCurveSpawn();
+  if (trailCurves) {
+    CloneCurveSpawn();    
+  }
 
   noFill();
   stroke(primaryColor);
@@ -231,10 +250,21 @@ void draw() {
     float dCurveEasing = targetCurveY - smoothSpectrum[abs(i)];
     smoothSpectrum[abs(i)] += dCurveEasing * curveEasingVal;
 
-    //stroke( lerpColor( #ff0000, #ffffff, (smoothSpectrum[constrain(abs(i)+((i>0)?-1:+1), 0, curveBands)]/-30)));
-    curveVertex(spectrumCurveCenter + i*curveVertexDist, smoothSpectrum[abs(i)] + spectrumCurveYPos);
+    PVector vertexPos = PVector.lerp(lineShape[curveBands + i], circleShape[curveBands + i], shapeLerpAmount);
+	  curveVertex(spectrumCurveCenter + vertexPos.x, 
+                smoothSpectrum[abs(i)] + spectrumCurveYPos,
+                vertexPos.y);
+    
+    // //Old way I did circle
+    // curveVertex(spectrumCurveCenter + ((curveBands*curveVertexDist)/2) * cos(i * radians(180/curveBands) + PI/2), //X pos
+    //             smoothSpectrum[abs(i)] + spectrumCurveYPos, //Y pos
+    //             ((curveBands*curveVertexDist)/2) * sin(i * radians(180/curveBands)+ PI/2)); //Z pos
+    // //Old way I did the line
+    // curveVertex(spectrumCurveCenter + i*curveVertexDist, 
+    //             smoothSpectrum[abs(i)] + spectrumCurveYPos),
+    //             0;
   }
-  endShape();
+  endShape((shapeLerpAmount >= 0.97f)?CLOSE:OPEN);
 
 
   if(gradientCurves){

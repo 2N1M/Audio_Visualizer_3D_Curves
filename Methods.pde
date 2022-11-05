@@ -27,10 +27,19 @@ void GradientCurveDraw() {
   for (int j = 1; j <=gradientCurvesNumber; j++) {
     beginShape();
 
-    for ( int i = curveBands; i > -curveBands; i--) {
-      stroke(primaryColor, 255-j*(255/gradientCurvesNumber));
-      curveVertex(spectrumCurveCenter + i*curveVertexDist, smoothSpectrum[abs(i)]/ lerp(1, 2, j) + spectrumCurveYPos, gradientCurvesDistance + j* gradientCurvesDistance);
+    for ( int i = -curveBands; i < curveBands; i++) {
+
+      stroke(primaryColor, 255- j*(255/gradientCurvesNumber));
+      
+      PVector vertexPos = PVector.lerp(lineShape[curveBands + i], circleShape[curveBands + i], shapeLerpAmount);
+      scale(1-(shapeLerpAmount/1000),1,1-(shapeLerpAmount/1000));
+	    curveVertex(spectrumCurveCenter + vertexPos.x, 
+                 smoothSpectrum[abs(i)]/ lerp(1, 2, j) + spectrumCurveYPos,
+                 (1 - shapeLerpAmount) * j* gradientCurvesDistance + vertexPos.y);
+
+      
+      //curveVertex(spectrumCurveCenter + i*curveVertexDist, smoothSpectrum[abs(i)]/ lerp(1, 2, j) + spectrumCurveYPos, j* gradientCurvesDistance);
     }
-    endShape();
+    endShape((shapeLerpAmount >= 0.97f)?CLOSE:OPEN);
   }
 }

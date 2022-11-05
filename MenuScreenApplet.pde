@@ -216,6 +216,10 @@ class MenuScreenApplet extends PApplet {
             zoomLevel = 0;            
           }
           break;
+        case 5:
+          trailCurves = buttons[i].buttonPressed;
+          break;
+        
       }      
     }
 
@@ -240,15 +244,19 @@ class MenuScreenApplet extends PApplet {
         case 5:
           orbitSpeed = sliders[i].sliderValue;
           break;
+        case 6:
+          curveMaxClones = sliders[i].sliderValue;
+          break;
+        case 7:
+          shapeLerpAmount = sliders[i].sliderValue;
+          break;
+        case 8:
+          spectrumJumpMultiplier = -sliders[i].sliderValue;
+          break;
+        case 9:
+          curveCloneSpawnTime = sliders[i].sliderValue;
+          break;
       }      
-    }
-  }
-
-  void cursorHand(boolean isCursorHand){
-    if(isCursorHand){
-      cursor(HAND);
-    } else if(mousePresent) {
-      cursor(ARROW);
     }
   }
 
@@ -342,10 +350,8 @@ class MenuScreenApplet extends PApplet {
       //Check if mouse is hovering over slider handle element and react
       if (mouseX > sliderHandlePos && mouseX <  sliderHandlePos + sliderHandleWidth &&
         mouseYWithScroll > ypos && mouseYWithScroll < sliderHeight + ypos) {
-        cursorHand(true);  
         sliderHandleHover = true;
-      } else {               
-        cursorHand(false);
+      } else {
         sliderHandleHover = false;
       }
       

@@ -41,6 +41,16 @@
         },
         {
             "elementType": "slider",
+            "sliderName": "Line circle lerp",
+            "defaultValue": 0,
+            "minValue": 0,
+            "maxValue": 1,
+            "nfLeft": 1,
+            "nfRight": 2,
+            "sliderID": 7
+        },
+        {
+            "elementType": "slider",
             "sliderName": "Curve sound sensitivity",
             "defaultValue": 1500,
             "minValue": 1000,
@@ -52,7 +62,7 @@
         {
             "elementType": "toggleButton",
             "buttonName": "Fill main curve",
-            "startState": true,
+            "startState": false,
             "buttonID": 0
         },
         {
@@ -63,8 +73,44 @@
         },
         {
             "elementType": "toggleButton",
-            "buttonName": "Front gradient curves",
+            "buttonName": "Trail curves",
             "startState": true,
+            "buttonID": 5
+        },
+        {
+            "elementType": "slider",
+            "sliderName": "Trailing curves spawn time",
+            "defaultValue": 300,
+            "minValue": 10,
+            "maxValue": 600,
+            "nfLeft": 3,
+            "nfRight": 0,
+            "sliderID": 9
+        },
+        {
+            "elementType": "slider",
+            "sliderName": "Trailing curves",
+            "defaultValue": 50,
+            "minValue": 5,
+            "maxValue": 50,
+            "nfLeft": 2,
+            "nfRight": 0,
+            "sliderID": 6
+        },
+        {
+            "elementType": "slider",
+            "sliderName": "Main curve bass bounce",
+            "defaultValue": 300,
+            "minValue": 300,
+            "maxValue": 5000,
+            "nfLeft": 4,
+            "nfRight": 0,
+            "sliderID": 8
+        },
+        {
+            "elementType": "toggleButton",
+            "buttonName": "Front gradient curves",
+            "startState": false,
             "buttonID": 2
         },
         {
